@@ -17,3 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/welcome', function () {
     return 'Bienvenidos a mi aplicacion de tareas';
 });
+
+Route::post('/tasks', function () {
+    return 'Crear Tarea';
+});
+
+Route::put('/tasks/{id}', function ($id) {
+    return 'Actualizar Tarea '.$id;
+});
+
+Route::delete('/tasks/{id}', function ($id) {
+    return 'Eliminar Tarea: '.$id;
+});
+
+Route::get('/tasks/{id}', function ($id) {
+    return 'Recuperar Tarea por id: '.$id;
+});
+
+Route::get('/tasks', function () {
+    return 'Recuperar todas las tareas';
+});
