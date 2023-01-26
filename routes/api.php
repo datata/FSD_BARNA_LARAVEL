@@ -30,8 +30,6 @@ Route::delete('/tasks/{id}', function ($id) {
     return 'Eliminar Tarea: ' . $id;
 });
 
-Route::get('/tasks/{id}', function ($id) {
-    return 'Recuperar Tarea por id: ' . $id;
-});
+Route::get('/tasks/{id}', [TaskController::class, 'getTaskById']);
 
 Route::get('/tasks', [TaskController::class, 'getAllTasks']);

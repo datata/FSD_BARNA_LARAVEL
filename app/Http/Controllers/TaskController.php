@@ -51,4 +51,30 @@ class TaskController extends Controller
             ], 500);
         }
     }
+
+    public function getTaskById($id)
+    {
+        try {
+            $task = Task::query()->find($id);
+
+            if(!$task) {
+                return response([
+                    "success" => true,
+                    "message" => "Task doesnt exists",
+                    "data" => $task
+                ], 404);
+            }
+
+            return response([
+                "success" => true,
+                "message" => "Get Task by id retrieved successfully",
+                "data" => $task
+            ], 200);
+        } catch (\Throwable $th) {
+            return response([
+                "success" => false,
+                "message" => "Error retrieving task: " . $th->getMessage()
+            ], 500);
+        }
+    }
 }
