@@ -33,4 +33,22 @@ class TaskController extends Controller
             ], 500);
         }
     }
+
+    public function getAllTasks()
+    {
+        try {
+            $tasks = Task::query()->get();
+
+            return response([
+                "success" => true,
+                "message" => "Get Tasks retrieved successfully",
+                "data" => $tasks
+            ], 200);
+        } catch (\Throwable $th) {
+            return response([
+                "success" => false,
+                "message" => "Error retrieving tasks: " . $th->getMessage()
+            ], 500);
+        }
+    }
 }

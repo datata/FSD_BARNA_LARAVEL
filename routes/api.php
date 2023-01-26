@@ -34,6 +34,4 @@ Route::get('/tasks/{id}', function ($id) {
     return 'Recuperar Tarea por id: ' . $id;
 });
 
-Route::get('/tasks', function () {
-    return 'Recuperar todas las tareas';
-});
+Route::get('/tasks', [TaskController::class, 'getAllTasks']);
