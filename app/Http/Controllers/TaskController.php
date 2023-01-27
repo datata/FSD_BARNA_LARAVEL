@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
@@ -92,6 +93,7 @@ class TaskController extends Controller
 
     public function updateTaskById(Request $request, $id)
     {
+        Log::info('updating Task');
         try {
             //Recuperar tarea
             $task = Task::query()->find($id);
@@ -126,6 +128,7 @@ class TaskController extends Controller
                 "data" => $task
             ], 200);
         } catch (\Throwable $th) {
+            Log::error('Error updating task: '.$th->getMessage());
             return response([
                 "success" => false,
                 "message" => "Error updating task: " . $th->getMessage()
