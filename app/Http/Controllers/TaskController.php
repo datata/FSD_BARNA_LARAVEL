@@ -15,7 +15,7 @@ class TaskController extends Controller
                 'title' => 'required|min:8',
                 'description' => 'required',
             ]);
-     
+
             if ($validator->fails()) {
                 return response([
                     'success' => false,
@@ -69,7 +69,7 @@ class TaskController extends Controller
         try {
             $task = Task::query()->find($id);
 
-            if(!$task) {
+            if (!$task) {
                 return response([
                     "success" => true,
                     "message" => "Task doesnt exists",
@@ -97,7 +97,7 @@ class TaskController extends Controller
             $task = Task::query()->find($id);
 
             // Valido si la tarea existe en bd
-            if(!$task) {
+            if (!$task) {
                 return response([
                     "success" => true,
                     "message" => "Task doesnt exists",
@@ -110,9 +110,13 @@ class TaskController extends Controller
             $description = $request->input('description');
 
             // Actualizamos la tarea
-            $task->title = $title;
-            $task->description = $description;
+            if (isset($title)) {
+                $task->title = $title;
+            }
 
+            if (isset($description)) {
+                $task->description = $description;
+            }
             // actualiza en bd
             $task->save();
 
