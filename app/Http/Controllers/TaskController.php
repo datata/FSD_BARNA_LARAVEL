@@ -89,4 +89,43 @@ class TaskController extends Controller
             ], 500);
         }
     }
+
+    public function updateTaskById(Request $request, $id)
+    {
+        try {
+            //Recuperar tarea
+            $task = Task::query()->find($id);
+
+            // Valido si la tarea existe en bd
+            if(!$task) {
+                return response([
+                    "success" => true,
+                    "message" => "Task doesnt exists",
+                    "data" => $task
+                ], 404);
+            }
+
+            // Recuperamos la informacion a modificar del body a traves del objeto request
+            $title = $request->input('title');
+            $description = $request->input('description');
+
+            // Actualizamos la tarea
+            $task->title = $title;
+            $task->description = $description;
+
+            // actualiza en bd
+            $task->save();
+
+            return response([
+                "success" => true,
+                "message" => "Task updated successfully",
+                "data" => $task
+            ], 200);
+        } catch (\Throwable $th) {
+            return response([
+                "success" => false,
+                "message" => "Error updating task: " . $th->getMessage()
+            ], 500);
+        }
+    }
 }

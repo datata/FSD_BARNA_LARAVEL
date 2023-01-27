@@ -22,9 +22,7 @@ Route::get('/welcome', function () {
 
 Route::post('/tasks', [TaskController::class, 'createTask']);
 
-Route::put('/tasks/{id}', function ($id) {
-    return 'Actualizar Tarea ' . $id;
-});
+Route::put('/tasks/{id}', [TaskController::class, 'updateTaskById']);
 
 Route::delete('/tasks/{id}', function ($id) {
     return 'Eliminar Tarea: ' . $id;
